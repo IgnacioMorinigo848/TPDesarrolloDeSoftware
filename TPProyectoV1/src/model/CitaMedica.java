@@ -9,77 +9,96 @@ public class CitaMedica {
 	private Medico medico;
 	private Procedimiento Procedimiento;
 	private String diagnostico;
-	private ArrayList<Tratamiento> tratamiento;
+	private ArrayList<Tratamiento> tratamientos;
 	private LocalDateTime fechaYHora;
-	private String estadoCita = new Estado().Programada();
+	private Estado estadoCita;
 	private Factura factura;
-	private Especialidad motivo;
-	public CitaMedica(Paciente paciente, Medico medico, Procedimiento procedimiento, LocalDateTime fechaYHora,
-			Especialidad motivo) {
+	private String motivo;
+
+	public CitaMedica(Paciente paciente, Medico medico, Procedimiento procedimiento, LocalDateTime fechaYHora, String motivo) {
 		super();
 		this.paciente = paciente;
 		this.medico = medico;
 		this.Procedimiento = procedimiento;
 		this.fechaYHora = fechaYHora;
 		this.motivo = motivo;
+		this.estadoCita = Estado.PROGRAMADA;
 	}
-	public void asignarTratamiento(ArrayList<Tratamiento> tratamiento) {}
+
+	public void agregarTratamiento(Tratamiento tratamiento) {
+
+		this.tratamientos.add(tratamiento);
+	}
 	
-	public void asignarDiagnostico(String Diagnostico) {}
+	public void asignarDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
 	
-	public void actualizarEstado(Estado estado) {}
+	public void finalizada() {
+		this.estadoCita = Estado.FINALIZADA;;
+	}
+
+	public void cancelada(){
+		this.estadoCita = Estado.FINALIZADA;
+	}
+
 	public Paciente getPaciente() {
-		return paciente;
+		return this.paciente;
 	}
+
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
 	public Medico getMedico() {
-		return medico;
+		return this.medico;
 	}
+
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
+
 	public Procedimiento getProcedimiento() {
-		return Procedimiento;
+		return this.Procedimiento;
 	}
+
 	public void setProcedimiento(Procedimiento procedimiento) {
-		Procedimiento = procedimiento;
+		this.Procedimiento = procedimiento;
 	}
+
 	public String getDiagnostico() {
-		return diagnostico;
+		return this.diagnostico;
 	}
-	public void setDiagnostico(String diagnostico) {
-		this.diagnostico = diagnostico;
-	}
+
 	public ArrayList<Tratamiento> getTratamiento() {
-		return tratamiento;
+		return this.tratamientos;
 	}
-	public void setTratamiento(ArrayList<Tratamiento> tratamiento) {
-		this.tratamiento = tratamiento;
-	}
+
 	public LocalDateTime getFechaYHora() {
-		return fechaYHora;
+		return this.fechaYHora;
 	}
+
 	public void setFechaYHora(LocalDateTime fechaYHora) {
 		this.fechaYHora = fechaYHora;
 	}
-	public String getEstadoCita() {
-		return estadoCita;
+
+	public Estado getEstadoCita() {
+		return this.estadoCita;
 	}
-	public void setEstadoCita(String estadoCita) {
-		this.estadoCita = estadoCita;
-	}
+
 	public Factura getFactura() {
-		return factura;
+		return this.factura;
 	}
+
 	public void setFactura(Factura factura) {
 		this.factura = factura;
 	}
-	public Especialidad getMotivo() {
-		return motivo;
+
+	public String getMotivo() {
+		return this.motivo;
 	}
-	public void setMotivo(Especialidad motivo) {
+
+	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
 	
