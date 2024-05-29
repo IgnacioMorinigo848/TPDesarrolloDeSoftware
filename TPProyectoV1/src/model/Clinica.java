@@ -10,11 +10,14 @@ public class Clinica {
 	private ArrayList<Especialidad> especialidades;
 	private ArrayList<CitaMedica> citasMedicas;
 	
-public void registrarPaciente(Paciente paciente) {
+public void registrarPaciente(String nombre, String apellido, int dni, boolean jubilado, String seguroSocial,
+LocalDate fechaNacimiento, int telefono, HistoriaClinica historiaClinica) {
+	Paciente paciente = new Paciente(nombre, apellido, dni, jubilado, seguroSocial, fechaNacimiento, telefono, historiaClinica);
 	pacientes.add(paciente);
 }
 
-public void registrarCitaMedica(CitaMedica citaMedica) {
+public void registrarCitaMedica(Paciente paciente, Medico medico, Procedimiento procedimiento, LocalDateTime fechaYHora, String motivo) {
+	CitaMedica citaMedica = new CitaMedica(paciente, medico, procedimiento, fechaYHora, motivo);
 	citasMedicas.add(citaMedica);
 }
 
@@ -48,21 +51,31 @@ public CitaMedica getCitaMedica(LocalDateTime fechaYHora, int dni) {
 	return cm;
 }
 
-public void actualizarCita(CitaMedica cita, String estado ) {
-	cita.setEstadoCita(estado);
-}
-public void filtarCitaPorEspecialidad(String Especialidad) {
-	for (CitaMedica citaMedica : citasMedicas) {
-		if(citaMedica.getMedico().getEspecialidad().equals(Especialidad)) 
-			System.out.println(citaMedica.toString());
-	}
+public void finalizarCita(CitaMedica cita) {
+	cita.finalizada();
 }
 
-public void filtrarCitaPorMedicoAsignado(int idMedico) {
+public void cancelarCita(CitaMedica cita){
+	cita.cancelada();
+}
+
+public ArrayList<CitaMedica> filtarCitaPorEspecialidad(String Especialidad) {
+	ArrayList<CitaMedica> citasFiltradas = new ArrayList<CitaMedica>();
+	for (CitaMedica citaMedica : citasMedicas) {
+		if(citaMedica.getMedico().getEspecialidad().equals(Especialidad)) 
+			citasFiltradas.add(citaMedica);
+	}
+	return citasFiltradas;
+}
+
+
+public ArrayList<CitaMedica> filtrarCitaPorMedicoAsignado(int idMedico) {
+	ArrayList<CitaMedica> citasFiltradas = new ArrayList<CitaMedica>();
 	for (CitaMedica citaMedica : citasMedicas) {
 		if(citaMedica.getMedico().getIdMedico() == idMedico) 
-			System.out.println(citaMedica.toString());
+			citasFiltradas.add(citaMedica);
 	}
+	return citasFiltradas;
 }
 
 public void filtrarCitaPorFecha(LocalDate fecha) {
