@@ -10,14 +10,11 @@ public class Clinica {
 	private ArrayList<Especialidad> especialidades;
 	private ArrayList<CitaMedica> citasMedicas;
 	
-public void registrarPaciente(String nombre, String apellido, int dni, boolean jubilado, String seguroSocial,
-LocalDate fechaNacimiento, int telefono, HistoriaClinica historiaClinica) {
-	Paciente paciente = new Paciente(nombre, apellido, dni, jubilado, seguroSocial, fechaNacimiento, telefono, historiaClinica);
+public void registrarPaciente(Paciente paciente) {
 	pacientes.add(paciente);
 }
 
-public void registrarCitaMedica(Paciente paciente, Medico medico, Procedimiento procedimiento, LocalDateTime fechaYHora, String motivo) {
-	CitaMedica citaMedica = new CitaMedica(paciente, medico, procedimiento, fechaYHora, motivo);
+public void registrarCitaMedica(CitaMedica citaMedica) {
 	citasMedicas.add(citaMedica);
 }
 
@@ -51,31 +48,26 @@ public CitaMedica getCitaMedica(LocalDateTime fechaYHora, int dni) {
 	return cm;
 }
 
-public void finalizarCita(CitaMedica cita) {
-	cita.finalizada();
+public void finalizarCitaMedica(CitaMedica citaMedica) {
+	citaMedica.finalizarCita();
 }
 
-public void cancelarCita(CitaMedica cita){
-	cita.cancelada();
+public void cancelarCitaMedica(CitaMedica citaMedica) {
+	citaMedica.cancelarCita();
 }
 
-public ArrayList<CitaMedica> filtarCitaPorEspecialidad(String Especialidad) {
-	ArrayList<CitaMedica> citasFiltradas = new ArrayList<CitaMedica>();
+public void filtarCitaPorEspecialidad(String Especialidad) {
 	for (CitaMedica citaMedica : citasMedicas) {
 		if(citaMedica.getMedico().getEspecialidad().equals(Especialidad)) 
-			citasFiltradas.add(citaMedica);
+			System.out.println(citaMedica.toString());
 	}
-	return citasFiltradas;
 }
 
-
-public ArrayList<CitaMedica> filtrarCitaPorMedicoAsignado(int idMedico) {
-	ArrayList<CitaMedica> citasFiltradas = new ArrayList<CitaMedica>();
+public void filtrarCitaPorMedicoAsignado(int idMedico) {
 	for (CitaMedica citaMedica : citasMedicas) {
 		if(citaMedica.getMedico().getIdMedico() == idMedico) 
-			citasFiltradas.add(citaMedica);
+			System.out.println(citaMedica.toString());
 	}
-	return citasFiltradas;
 }
 
 public void filtrarCitaPorFecha(LocalDate fecha) {
@@ -85,8 +77,29 @@ public void filtrarCitaPorFecha(LocalDate fecha) {
 	}
 }
 
-public void cargarHistoriaAClinica(Paciente paciente, CitaMedica citaMedica) {
-	
+public void cargarHistoriaAClinica(int dni, CitaMedica citaMedica) {
+	int i=0;
+	while (i<= pacientes.size() && pacientes.get(i).getDni() != dni) {
+		i++;
+	}
+	if(i<=pacientes.size()) {
+		pacientes.get(i).agregarCitaMedica(citaMedica);
+	}
 }
 
+public void registrarTratamiento(CitaMedica citaMedica, Tratamiento tratamiento) {
+	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO) && !citaMedica.getEstadoCita().equals(Estado.CANCELADO))
+		citaMedica.asignarTratamiento(tratamiento);
+}
+public void generarFactura(CitaMedica citaMedica) {
+	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO)) {
+		Factura factura = new Factura();
+		citaMedica.setFactura(factura);
+	}
+}
+
+public void generarPagoFactura(CitaMedica citaMedica) {
+	Factura factura = citaMedica.getFactura();
+	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO) && factura.equals(factura.ge))
+}
 }

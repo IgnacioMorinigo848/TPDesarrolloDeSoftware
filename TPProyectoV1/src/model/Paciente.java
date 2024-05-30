@@ -1,24 +1,29 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Paciente extends Persona {
 	private boolean jubilado;
 	private String seguroSocial;
 	private LocalDate fechaNacimiento;
 	private int telefono;
-	private HistoriaClinica historiaClinica;
+	private ArrayList<CitaMedica> historiaClinica;
 	public Paciente(String nombre, String apellido, int dni, boolean jubilado, String seguroSocial,
-			LocalDate fechaNacimiento, int telefono, HistoriaClinica historiaClinica) {
+			LocalDate fechaNacimiento, int telefono) {
 		super(nombre, apellido, dni);
 		this.jubilado = jubilado;
 		this.seguroSocial = seguroSocial;
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
-		this.historiaClinica = historiaClinica;
+		this.historiaClinica = new ArrayList<CitaMedica>();
 	}
 	
-	public void getHistoriaClinica() {}
+	public void getHistoriaClinica() {
+		for (CitaMedica citaMedica : historiaClinica) {
+			System.out.println(citaMedica.toString());
+		}
+	}
 
 	public boolean isJubilado() {
 		return jubilado;
@@ -51,9 +56,9 @@ public class Paciente extends Persona {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
-
-	public void setHistoriaClinica(HistoriaClinica historiaClinica) {
-		this.historiaClinica = historiaClinica;
+	
+	public void agregarCitaMedica(CitaMedica citaMedica) {
+		this.historiaClinica.add(citaMedica);
 	}
 	
 	
