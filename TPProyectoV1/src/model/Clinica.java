@@ -105,8 +105,9 @@ public void cargarHistoriaAClinica(int dni, CitaMedica citaMedica) {
 }
 
 public void registrarTratamiento(CitaMedica citaMedica, Tratamiento tratamiento) {
-	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO) && !citaMedica.getEstadoCita().equals(Estado.CANCELADO))
-		citaMedica.asignarTratamiento(tratamiento);
+	citaMedica.asignarTratamiento(tratamiento);
+	citaMedica.finalizarCita();
+	
 }
 
 
