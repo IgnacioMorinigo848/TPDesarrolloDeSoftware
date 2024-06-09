@@ -30,7 +30,8 @@ public class Main {
 	public void cargarMedicoXEspecialidad() {}
 	
 	public static void main(String[] args) {
-		Clinica clinica = new Clinica();
+		Clinica clinica = null;
+		clinica.getInstance();
 		// TODO Auto-generated method stub
 		cargarEspecialidadXProcedimiento("Cardiologia","Cateterismo cardíaco",2000.0,"Angioplastia coronaria"
 				,3000.0,"Implante de marcapasos",60.000,"Ablación cardíaca",500.000,"Ecocardiograma",20.000);

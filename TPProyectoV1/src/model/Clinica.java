@@ -5,11 +5,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Clinica {
+	private static Clinica instance;
 	private ArrayList<Paciente> pacientes;
 	private ArrayList<Medico> medicos;
 	private ArrayList<Especialidad> especialidades;
 	private ArrayList<CitaMedica> citasMedicas;
+	private FactoryMethodPaciente createPaciente;
 	
+private Clinica() {
+	this.pacientes = new ArrayList<Paciente>();
+	this.medicos = new ArrayList<Medico>();
+	this.especialidades = new ArrayList<Especialidad>();
+	this.citasMedicas = new ArrayList<CitaMedica>();
+	this.createPaciente = new ConcreteFactoryPaciente();
+	}
+
+public static Clinica getInstance () {
+	if(instance == null) {
+		instance = new Clinica();
+	}
+	return instance;
+}
+
 public void registrarPaciente(Paciente paciente) {
 	pacientes.add(paciente);
 }
@@ -91,15 +108,8 @@ public void registrarTratamiento(CitaMedica citaMedica, Tratamiento tratamiento)
 	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO) && !citaMedica.getEstadoCita().equals(Estado.CANCELADO))
 		citaMedica.asignarTratamiento(tratamiento);
 }
-public void generarFactura(CitaMedica citaMedica) {
-	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO)) {
-		Factura factura = new Factura();
-		citaMedica.setFactura(factura);
-	}
-}
 
-public void generarPagoFactura(CitaMedica citaMedica) {
-	Factura factura = citaMedica.getFactura();
-	if(citaMedica.getEstadoCita().equals(Estado.FINALIZADO) && factura.equals(factura.ge))
-}
+
+
+
 }

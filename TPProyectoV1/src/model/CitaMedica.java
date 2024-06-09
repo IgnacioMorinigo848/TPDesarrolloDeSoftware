@@ -11,19 +11,28 @@ public class CitaMedica {
 	private String diagnostico;
 	private ArrayList<Tratamiento> tratamiento;
 	private LocalDateTime fechaYHora;
-	private Estado estadoCita;
-	private Factura factura;
+	private EstadoCita estadoCita;
+	private final EstadoCita programada;
+	private final EstadoCita finalizada;
+	private final EstadoCita cancelada;
 	private Especialidad motivo;
+	
+	
 	public CitaMedica(Paciente paciente, Medico medico, Procedimiento procedimiento, LocalDateTime fechaYHora,
 			Especialidad motivo) {
-		super();
 		this.paciente = paciente;
 		this.medico = medico;
 		this.Procedimiento = procedimiento;
 		this.fechaYHora = fechaYHora;
 		this.motivo = motivo;
-		this.estadoCita = Estado.PROGRAMADA;
+		this.programada = new EstadoProgramarCita(this);
+		this.finalizada = new EstadoFinalizarCita(this);
+		this.cancelada = new EstadoCancelarcita(this);
+		this.estadoCita = programada;
 		this.tratamiento = new ArrayList<Tratamiento>();
+	}
+	public void setEstadoCita(EstadoCita estadoCita) {
+		this.estadoCita = estadoCita;
 	}
 	public void asignarTratamiento(Tratamiento tratamiento) {
 		this.tratamiento.add(tratamiento);
@@ -53,36 +62,46 @@ public class CitaMedica {
 	public void setTratamiento(ArrayList<Tratamiento> tratamiento) {
 		this.tratamiento = tratamiento;
 	}
+	
+	
 	public LocalDateTime getFechaYHora() {
 		return fechaYHora;
 	}
 	public void setFechaYHora(LocalDateTime fechaYHora) {
 		this.fechaYHora = fechaYHora;
 	}
-	public Estado getEstadoCita() {
+	public EstadoCita getEstadoCita() {
 		return estadoCita;
 	}
 	
+	public void programarCita() {
+		estadoCita.programada();
+	} 
+	
 	public void finalizarCita() {
-		this.estadoCita = Estado.FINALIZADO;
+		estadoCita.finalizada();
 	}
 	
 	public void cancelarCita() {
-		this.estadoCita = Estado.CANCELADO;
+		estadoCita.cancelada();
 	}
 	
-	public Factura getFactura() {
-		return factura;
-	}
-	public void setFactura(Factura factura) {
-		this.factura = factura;
-	}
 	public Especialidad getMotivo() {
 		return motivo;
 	}
 	public void setMotivo(Especialidad motivo) {
 		this.motivo = motivo;
 	}
+	public EstadoCita getFinalizada() {
+		return finalizada;
+	}
+	public EstadoCita getCancelada() {
+		return cancelada;
+	}
+	public void setProcedimiento(Procedimiento procedimiento) {
+		Procedimiento = procedimiento;
+	}
+	
 	
 	
 }
