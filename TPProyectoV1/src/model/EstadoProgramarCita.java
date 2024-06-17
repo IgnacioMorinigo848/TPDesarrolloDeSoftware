@@ -6,25 +6,25 @@ public class EstadoProgramarCita implements EstadoCita {
 		this.cita = cita;
 	}
 	@Override
-	public void programada() {
+	public String programada() {
 		// TODO Auto-generated method stub
-		System.out.println("La cita medica ya fue programada.");
+		return "La cita medica ya fue programada.";
 
 	}
 
 	@Override
-	public void finalizada() {
+	public String finalizada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getFinalizada());;
-		System.out.println("Se ha finalizado la cita medica.");
+		return "Se ha finalizado la cita medica.";
 		
 	}
 
 	@Override
-	public void cancelada() {
+	public String cancelada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getCancelada());;
-		System.out.println("Se ha cancelado la cita medica.");
+		return "Se ha cancelado la cita medica.";
 
 	}
 

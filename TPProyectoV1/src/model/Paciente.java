@@ -9,6 +9,10 @@ public class Paciente extends Persona {
 	private LocalDate fechaNacimiento;
 	private int telefono;
 	private ArrayList<CitaMedica> historiaClinica;
+	
+		
+
+
 	public Paciente(String nombre, String apellido, int dni, boolean jubilado, String seguroSocial,
 			LocalDate fechaNacimiento, int telefono) {
 		super(nombre, apellido, dni);
@@ -17,16 +21,6 @@ public class Paciente extends Persona {
 		this.fechaNacimiento = fechaNacimiento;
 		this.telefono = telefono;
 		this.historiaClinica = new ArrayList<CitaMedica>();
-	}
-	
-	public void getHistoriaClinica() {
-		for (CitaMedica citaMedica : historiaClinica) {
-			System.out.println(citaMedica.toString());
-		}
-	}
-
-	public boolean isJubilado() {
-		return jubilado;
 	}
 
 	public void setJubilado(boolean jubilado) {
@@ -59,6 +53,13 @@ public class Paciente extends Persona {
 	
 	public void agregarCitaMedica(CitaMedica citaMedica) {
 		this.historiaClinica.add(citaMedica);
+	}
+
+	@Override
+	public String toString() {
+		return "Paciente [jubilado=" + jubilado + ", seguroSocial=" + seguroSocial + ", fechaNacimiento="
+				+ fechaNacimiento + ", telefono=" + telefono + ", historiaClinica=" + historiaClinica + ", nombre="
+				+ nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
 	}
 	
 	

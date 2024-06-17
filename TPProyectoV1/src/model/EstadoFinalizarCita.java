@@ -9,24 +9,24 @@ public class EstadoFinalizarCita implements EstadoCita {
 	}
 
 	@Override
-	public void programada() {
+	public String programada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getFinalizada());
-		System.out.println("Se a finalizado la cita medica.");
+		return "Se a finalizado la cita medica.";
 
 	}
 
 	@Override
-	public void finalizada() {
+	public String finalizada() {
 		// TODO Auto-generated method stub
-		System.out.println("La cita medica ya ha sido finalizada.");
+		return "La cita medica ya ha sido finalizada.";
 
 	}
 
 	@Override
-	public void cancelada() {
+	public String cancelada() {
 		// TODO Auto-generated method stub
-		System.out.println("La cita medica ya ha sido finalizada.");
+		return "La cita medica ya ha sido finalizada.";
 	}
 
 }

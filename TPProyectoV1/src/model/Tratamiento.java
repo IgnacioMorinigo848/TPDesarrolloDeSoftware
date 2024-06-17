@@ -3,20 +3,17 @@ package model;
 import java.time.LocalDate;
 
 public class Tratamiento {
-	private String nombre;
 	private String descripcion;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
-	@Override
-	public String toString() {
-		return "Tratamiento [nombre=" + nombre + ", descripcion=" + descripcion + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + "]";
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	
+	
+	
+	
+	public Tratamiento(String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
+		this.descripcion = descripcion;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 	}
 	public String getDescripcion() {
 		return descripcion;
@@ -35,6 +32,12 @@ public class Tratamiento {
 	}
 	public void setFechaFin(LocalDate fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+	
+	@Override
+	public String toString() {
+		return "Tratamiento [ descripcion=" + descripcion + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + "]";
 	}
 	
 	}

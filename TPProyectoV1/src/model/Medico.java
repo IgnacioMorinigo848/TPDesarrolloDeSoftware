@@ -1,10 +1,12 @@
 package model;
 
 public class Medico extends Persona{
-	private int idMedico; 
+	private int idMedico =1; 
 	private Especialidad especialidad;
+	
 	public Medico(String nombre, String apellido, int dni, Especialidad especialidad) {
 		super(nombre, apellido, dni);
+		this.idMedico ++;
 		this.especialidad = especialidad;
 	}
 	public int getIdMedico() {
@@ -19,5 +21,11 @@ public class Medico extends Persona{
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
 	}
+	@Override
+	public String toString() {
+		return "Medico [idMedico=" + idMedico + ", especialidad=" + especialidad + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", dni=" + dni + "]";
+	}
+	
 	
 }

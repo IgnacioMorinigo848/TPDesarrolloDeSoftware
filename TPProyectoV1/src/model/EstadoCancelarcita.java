@@ -9,24 +9,24 @@ public class EstadoCancelarcita implements EstadoCita {
 	}
 
 	@Override
-	public void programada() {
+	public String programada() {
 		// TODO Auto-generated method stub
-		System.out.println("La cita medica ya esta cancelada");
+		return "La cita medica ya esta cancelada";
 
 	}
 
 	@Override
-	public void finalizada() {
+	public String finalizada() {
 		// TODO Auto-generated method stub
-		System.out.println("La cita medica ya esta cancelada.");
+		return "La cita medica ya esta cancelada.";
 
 	}
 
 	@Override
-	public void cancelada() {
+	public String cancelada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getCancelada());
-		System.out.println("Se ha cancelado la cita.");
+		return "Se ha cancelado la cita.";
 
 	}
 

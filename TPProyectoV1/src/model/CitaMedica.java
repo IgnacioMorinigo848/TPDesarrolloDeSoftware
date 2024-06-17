@@ -9,7 +9,7 @@ public class CitaMedica {
 	private Medico medico;
 	private Procedimiento Procedimiento;
 	private String diagnostico;
-	private ArrayList<Tratamiento> tratamiento;
+	private Tratamiento tratamiento;
 	private LocalDateTime fechaYHora;
 	private EstadoCita estadoCita;
 	private final EstadoCita programada;
@@ -29,13 +29,9 @@ public class CitaMedica {
 		this.finalizada = new EstadoFinalizarCita(this);
 		this.cancelada = new EstadoCancelarcita(this);
 		this.estadoCita = programada;
-		this.tratamiento = new ArrayList<Tratamiento>();
 	}
 	public void setEstadoCita(EstadoCita estadoCita) {
 		this.estadoCita = estadoCita;
-	}
-	public void asignarTratamiento(Tratamiento tratamiento) {
-		this.tratamiento.add(tratamiento);
 	}
 	
 	public Paciente getPaciente() {
@@ -56,10 +52,10 @@ public class CitaMedica {
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
-	public ArrayList<Tratamiento> getTratamiento() {
+	public Tratamiento getTratamiento() {
 		return tratamiento;
 	}
-	public void setTratamiento(ArrayList<Tratamiento> tratamiento) {
+	public void setTratamiento(Tratamiento tratamiento) {
 		this.tratamiento = tratamiento;
 	}
 	
@@ -74,16 +70,16 @@ public class CitaMedica {
 		return estadoCita;
 	}
 	
-	public void programarCita() {
-		estadoCita.programada();
+	public String programarCita() {
+		return estadoCita.programada();
 	} 
 	
-	public void finalizarCita() {
-		estadoCita.finalizada();
+	public String finalizarCita() {
+		return estadoCita.finalizada();
 	}
 	
-	public void cancelarCita() {
-		estadoCita.cancelada();
+	public String cancelarCita() {
+		return estadoCita.cancelada();
 	}
 	
 	public Especialidad getMotivo() {
@@ -101,7 +97,11 @@ public class CitaMedica {
 	public void setProcedimiento(Procedimiento procedimiento) {
 		Procedimiento = procedimiento;
 	}
-	
+	@Override
+	public String toString() {
+		return "CitaMedica [diagnostico=" + diagnostico + ", tratamiento=" + tratamiento + ", fechaYHora=" + fechaYHora
+				+ ", motivo=" + motivo + "]";
+	}
 	
 	
 }

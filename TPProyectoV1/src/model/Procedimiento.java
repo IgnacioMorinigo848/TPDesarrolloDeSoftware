@@ -2,10 +2,10 @@ package model;
 
 public class Procedimiento {
 	private String nombre;
-	private Double costo;
-	public Procedimiento(String nombre, Double costo) {
+
+	public Procedimiento(String nombre) {
 		this.nombre = nombre;
-		this.costo = costo;
+	
 	}
 	public String getNombre() {
 		return nombre;
@@ -13,15 +13,10 @@ public class Procedimiento {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Double getCosto() {
-		return costo;
-	}
-	public void setCosto(Double costo) {
-		this.costo = costo;
-	}
+
 	@Override
 	public String toString() {
-		return "Procedimiento [nombre=" + nombre + ", costo=" + costo + "]";
+		return "Procedimiento [nombre=" + nombre + "]";
 	}
 	
 	
