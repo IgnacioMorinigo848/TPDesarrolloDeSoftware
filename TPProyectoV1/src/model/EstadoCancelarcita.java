@@ -26,7 +26,7 @@ public class EstadoCancelarcita implements EstadoCita {
 	public String cancelada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getCancelada());
-		return "Se ha cancelado la cita.";
+		return "Se ha cancelado la cita medica.";
 
 	}
 

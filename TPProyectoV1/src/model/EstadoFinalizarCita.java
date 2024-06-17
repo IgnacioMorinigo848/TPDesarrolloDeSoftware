@@ -12,7 +12,7 @@ public class EstadoFinalizarCita implements EstadoCita {
 	public String programada() {
 		// TODO Auto-generated method stub
 		cita.setEstadoCita(cita.getFinalizada());
-		return "Se a finalizado la cita medica.";
+		return "Se ha finalizado la cita medica.";
 
 	}
 

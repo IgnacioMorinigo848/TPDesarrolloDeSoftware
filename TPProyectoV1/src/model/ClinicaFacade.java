@@ -12,43 +12,33 @@ public class ClinicaFacade {
 		clinica = Clinica.getInstance();
 		factory = new ConcreteAbstractFactoryPersona();
 	}
-	public void registrarPaciente(String nombre, String apellido, int dni,boolean jubilado,String seguroSocial,
+	public String registrarPaciente(String nombre, String apellido, int dni,boolean jubilado,String seguroSocial,
 			LocalDate fechaNacimiento,int telefono) {
-		
-		clinica.registrarPaciente(factory.crearPaciente(nombre,apellido,dni,jubilado,seguroSocial,fechaNacimiento,telefono));
+		return clinica.registrarPaciente(factory.crearPaciente(nombre,apellido,dni,jubilado,seguroSocial,fechaNacimiento,telefono));
 	}
 	
-	public void registrarCitaMedica(int dniPaciente,int idMedico,Procedimiento procedimiento,LocalDateTime fechaYHora ) {
-		System.out.println(clinica.registrarCitaMedica(dniPaciente, idMedico, procedimiento, fechaYHora));
+	public String registrarCitaMedica(int dniPaciente,int idMedico,Procedimiento procedimiento,LocalDateTime fechaYHora ) {
+		return clinica.registrarCitaMedica(dniPaciente, idMedico, procedimiento, fechaYHora);
 	}
 	
-	public void finalizarCitaMedica(int dniPaciente,LocalDateTime fechaYHora, String tratamiento, String diagnostico,LocalDate fechaInicio,LocalDate fechaFin) {
-		System.out.println(clinica.finalizarCitaMedica(dniPaciente, fechaYHora, tratamiento, diagnostico,fechaInicio,fechaFin));
+	public String finalizarCitaMedica(int dniPaciente,LocalDateTime fechaYHora, String tratamiento, String diagnostico,LocalDate fechaInicio,LocalDate fechaFin) {
+		return clinica.finalizarCitaMedica(dniPaciente, fechaYHora, tratamiento, diagnostico,fechaInicio,fechaFin);
 	}
 	
-	public void cancelarCitaMedica(int dniPaciente, LocalDateTime fechaYHora) {
-		System.out.println(clinica.cancelarCitaMedica(dniPaciente, fechaYHora));
+	public String cancelarCitaMedica(int dniPaciente, LocalDateTime fechaYHora) {
+		return clinica.cancelarCitaMedica(dniPaciente, fechaYHora);
 	}
 	
-	public void filtarCitaPorEspecialidad(String especilidad) {
-		ArrayList<CitaMedica> cita = clinica.filtarCitaPorEspecialidad(especilidad);
-		for (CitaMedica citaMedica : cita) {
-			System.out.println(citaMedica);
-		}
+	public ArrayList<CitaMedica> filtarCitaPorEspecialidad(String especilidad) {
+		return clinica.filtarCitaPorEspecialidad(especilidad);
 	}
 	
-	public void filtrarCitaPorMedicoAsignado(int idMedico) {
-		ArrayList<CitaMedica> cita = clinica.filtrarCitaPorMedicoAsignado(idMedico);
-		for (CitaMedica citaMedica : cita) {
-			System.out.println(citaMedica);
-		}
+	public ArrayList<CitaMedica> filtrarCitaPorMedicoAsignado(int idMedico) {
+		return clinica.filtrarCitaPorMedicoAsignado(idMedico);
 	}
 	
-	public void filtrarCitaPorFecha(LocalDate fecha) {
-		ArrayList<CitaMedica> cita = clinica.filtrarCitaPorFecha(fecha);
-		for (CitaMedica citaMedica : cita) {
-			System.out.println(citaMedica);
-		}
+	public ArrayList<CitaMedica> filtrarCitaPorFecha(LocalDate fecha) {
+		return clinica.filtrarCitaPorFecha(fecha);
 	}
 	
 	

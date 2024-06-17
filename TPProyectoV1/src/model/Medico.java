@@ -1,12 +1,12 @@
 package model;
 
 public class Medico extends Persona{
-	private int idMedico =1; 
+	private int idMedico; 
 	private Especialidad especialidad;
 	
-	public Medico(String nombre, String apellido, int dni, Especialidad especialidad) {
+	public Medico(int idMedico, String nombre, String apellido, int dni, Especialidad especialidad) {
 		super(nombre, apellido, dni);
-		this.idMedico ++;
+		this.idMedico =idMedico ;
 		this.especialidad = especialidad;
 	}
 	public int getIdMedico() {

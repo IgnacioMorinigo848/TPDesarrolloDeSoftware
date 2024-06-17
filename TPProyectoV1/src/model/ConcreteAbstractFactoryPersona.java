@@ -12,9 +12,9 @@ public class ConcreteAbstractFactoryPersona implements AbstractFactoryPersona {
 	}
 
 	@Override
-	public Medico crearMedico(String nombre, String apellido, int dni,Especialidad especialidad) {
+	public Medico crearMedico(int idMedico, String nombre, String apellido, int dni,Especialidad especialidad) {
 		// TODO Auto-generated method stub
-		return new Medico(nombre,apellido,dni,especialidad);
+		return new Medico(idMedico,nombre,apellido,dni,especialidad);
 	}
 
 }

@@ -46,7 +46,7 @@ public class Main {
 	}
 	
 	public static void cargarMedicoXEspecialidad() {
-		Medico m1 = new Medico("Carlos", "Rodriguez", 1233456, clinica.getEspecialidades().get(0));
+		Medico m1 = new Medico(1,"Carlos", "Rodriguez", 1233456, clinica.getEspecialidades().get(0));
 		
 		
 		clinica.getMedicos().add(m1);
@@ -69,12 +69,12 @@ public class Main {
 	}
 	
 	public static void cita() {
-		facade.registrarCitaMedica(123456,2, clinica.getEspecialidades().get(0).getProcedimiento().get(0),  LocalDateTime.of(2023, 6, 16, 14, 30));
+		System.out.println(facade.registrarCitaMedica(123456,1, clinica.getEspecialidades().get(0).getProcedimiento().get(0),  LocalDateTime.of(2023, 6, 16, 14, 30)));
 		facade.registrarCitaMedica(1234589,2, clinica.getEspecialidades().get(0).getProcedimiento().get(0),  LocalDateTime.of(2023, 6, 14, 14, 30));
 		facade.registrarCitaMedica(1234589,2, clinica.getEspecialidades().get(0).getProcedimiento().get(0),  LocalDateTime.of(2024, 4, 1, 15, 20));
 		
-		facade.finalizarCitaMedica(1234589, LocalDateTime.of(2024, 4, 1, 15, 20), "repo", "gripe", LocalDate.of(2024, 4, 1),LocalDate.of(2024, 4, 5) );
-		facade.cancelarCitaMedica(1234589, LocalDateTime.of(2024, 4, 1, 15, 20));
+		//System.out.println(facade.finalizarCitaMedica(123456, LocalDateTime.of(2023, 6, 16, 14, 30), "repo", "gripe", LocalDate.of(2024, 4, 1),LocalDate.of(2024, 4, 5)) );
+		System.out.println(facade.cancelarCitaMedica(1234589, LocalDateTime.of(2023, 6, 14, 14, 30)));
 	
 		facade.filtarCitaPorEspecialidad(clinica.getEspecialidades().get(0).getNombre());
 	}

@@ -16,30 +16,52 @@ private Clinica() {
 	this.medicos = new ArrayList<Medico>();
 	this.especialidades = new ArrayList<Especialidad>();
 	this.citasMedicas = new ArrayList<CitaMedica>();
+	
 }
 
 public static Clinica getInstance () {
 	return instance;
 }
 
-public void registrarPaciente(Paciente paciente) {
+public String registrarPaciente(Paciente paciente) {
+	String respuesta = null;
+	try {
 	if(this.getPaciente(paciente.dni) == null) {
 		pacientes.add(paciente);
+		respuesta = "Paciente registrado exitosamente.";
+	}
+	return respuesta;
+	}catch(Exception e) {
+		throw new Error ("El paciente ya esta en el sistema");
 	}
 }
 
 public String registrarCitaMedica(int dniPaciente, int idMedico, Procedimiento procedimiento, LocalDateTime fechaYHora) {
-    String respuesta = "Error: Existe una cita programada.";
-    Medico medico = this.getMedico(idMedico);
-    Paciente paciente = this.getPaciente(dniPaciente);
-    
-    if (medico != null && paciente != null && !this.existeCita(idMedico, fechaYHora, dniPaciente)) {
-        CitaMedica cita = new CitaMedica(paciente, medico, procedimiento, fechaYHora, medico.getEspecialidad());
-        citasMedicas.add(cita);
-        respuesta = "Cita programada exitosamente.";
+    try {
+	    Medico medico = this.getMedico(idMedico);
+	    Paciente paciente = this.getPaciente(dniPaciente);
+	    String respuesta ="";
+	    
+	    if (medico == null) {
+	        throw new Error( "Error: Médico no encontrado.");
+	    }
+	    
+	    if (paciente == null) {
+	        throw new Error( "Error: Paciente no encontrado.");
+	    }
+	
+	    if (!this.existeCita(idMedico, fechaYHora, dniPaciente)) {
+	        Especialidad e = medico.getEspecialidad();
+	        CitaMedica cita = new CitaMedica(paciente, medico, procedimiento, fechaYHora, e);
+	        respuesta ="Cita programada exitosamente.";
+	        citasMedicas.add(cita);
+	    }
+	    return respuesta;
+    }catch(Exception e) {
+    	throw new Error("Error: Existe una cita programada.");
     }
-    return respuesta;
 }
+
 
 
 private Paciente getPaciente(int dni) {
@@ -65,17 +87,21 @@ public Medico getMedico(int idMedico) {
 private CitaMedica getCitaMedica(LocalDateTime fechaYHora, int dni) {
 	int index = 0;
 	CitaMedica cm = null;
-	while(index <= citasMedicas.size() && (!citasMedicas.get(index).getFechaYHora().equals(fechaYHora) && citasMedicas.get(index).getPaciente().getDni() != dni )) 
+	while (index < citasMedicas.size() && 
+			(!citasMedicas.get(index).getFechaYHora().isEqual(fechaYHora) || 
+			citasMedicas.get(index).getPaciente().getDni() != dni)) {
 		index++;
-	if(index <= medicos.size())
+	}
+	if (index < citasMedicas.size()) {
 		cm = citasMedicas.get(index);
+	}
 	return cm;
 }
 
 public String finalizarCitaMedica(int dniPaciente, LocalDateTime fechaYHora, String tratamiento,
 		String diagnostico,LocalDate fechaInicio,LocalDate fechaFin) {
-	
-	String mensaje ="No se encuentra la cita Medica.";
+	try {
+	String mensaje ="";
 	
 	CitaMedica cita = this.getCitaMedica(fechaYHora, dniPaciente);
 	
@@ -85,15 +111,22 @@ public String finalizarCitaMedica(int dniPaciente, LocalDateTime fechaYHora, Str
 		this.agregarCitaAPacienteYClinica(cita,dniPaciente);
 	}
 	return mensaje;
+	}catch(Exception e) {
+		throw new Error("No se encuentra la cita Medica.");
+	}
 }
 
 public String cancelarCitaMedica(int dniPaciente, LocalDateTime fechaYHora) {
-	String mensaje ="No se encuentra la cita Medica.";
+	try {
+	String mensaje ="";
 	CitaMedica cita = this.getCitaMedica(fechaYHora, dniPaciente);
 	if(cita != null)
 		mensaje = cita.cancelarCita();
 	
 	return mensaje;
+	}catch(Exception e) {
+		throw new Error("No se encuentra la cita Medica.");
+	}
 }
 
 public ArrayList<CitaMedica> filtarCitaPorEspecialidad(String Especialidad) {
@@ -127,15 +160,16 @@ public ArrayList<CitaMedica> filtrarCitaPorFecha(LocalDate fecha) {
 }
 
 private boolean existeCita(int idMedico, LocalDateTime fechaYHora, int dniPaciente) {
-    for (CitaMedica cita : citasMedicas) {
-        if (cita.getMedico().getIdMedico() == idMedico &&
-            cita.getPaciente().getDni() == dniPaciente &&
-            cita.getFechaYHora().equals(fechaYHora)) {
-            return true; 
-        }
+    int i = 0;
+    while((i < citasMedicas.size()) && 
+          (citasMedicas.get(i).getMedico().getIdMedico() != idMedico ||
+           citasMedicas.get(i).getPaciente().getDni() != dniPaciente ||
+           !citasMedicas.get(i).getFechaYHora().isEqual(fechaYHora))) {
+        i++;
     }
-    return false; 
+    return i < citasMedicas.size(); 
 }
+
 
 
 private void agregarCitaAPacienteYClinica(CitaMedica cita,int dniPaciente) {
@@ -149,6 +183,8 @@ private void asignarTratamientoYDiagnostico(CitaMedica cita, String diagnostico,
 	cita.setTratamiento(new Tratamiento(tratamiento,fechaInicio,fechaFin));
 }
 
+
+//solo es para hacer pruebas.
 public ArrayList<Paciente> getPacientes() {
 	return pacientes;
 }
@@ -160,6 +196,10 @@ public ArrayList<Medico> getMedicos() {
 
 public ArrayList<Especialidad> getEspecialidades() {
 	return especialidades;
+}
+
+public ArrayList<CitaMedica> getCitasMedicas() {
+	return citasMedicas;
 }
 
 }
