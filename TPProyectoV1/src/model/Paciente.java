@@ -58,9 +58,10 @@ public class Paciente extends Persona {
 	@Override
 	public String toString() {
 		return "Paciente [jubilado=" + jubilado + ", seguroSocial=" + seguroSocial + ", fechaNacimiento="
-				+ fechaNacimiento + ", telefono=" + telefono + ", historiaClinica=" + historiaClinica + ", nombre="
-				+ nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+				+ fechaNacimiento + ", telefono=" + telefono + "]";
 	}
+	
+
 	
 	
 	

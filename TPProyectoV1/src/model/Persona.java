@@ -1,6 +1,7 @@
 package model;
 
 public abstract class Persona {
+	
 	protected String nombre;
 	protected String apellido;
 	protected int dni;
@@ -30,5 +31,8 @@ public abstract class Persona {
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
-	
+	@Override
+	public String toString() {
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+	}
 }

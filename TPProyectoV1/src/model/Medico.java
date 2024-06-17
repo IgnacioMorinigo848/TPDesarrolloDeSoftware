@@ -23,7 +23,7 @@ public class Medico extends Persona{
 	}
 	@Override
 	public String toString() {
-		return "Medico [idMedico=" + idMedico + ", especialidad=" + especialidad + ", nombre=" + nombre + ", apellido="
+		return "Medico [idMedico=" + idMedico + ", nombre=" + nombre + ", apellido="
 				+ apellido + ", dni=" + dni + "]";
 	}
 	
