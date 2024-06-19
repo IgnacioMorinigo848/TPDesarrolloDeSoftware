@@ -125,4 +125,5 @@ public class ClinicaTestAssert {
 		assertEquals(esperado,obtenido);
 	}
 	
+	
 }
